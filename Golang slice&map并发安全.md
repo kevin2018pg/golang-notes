@@ -32,8 +32,7 @@ func main() {
 
 结果没有到最大值9999，证实有数据丢失。
 
-![执行结果](./image/slice append并发.png)
-
+<p align="center"><img width="50%" src="image/slice append并发.png" /></p>
 
 
 **解决方法:** 加锁
