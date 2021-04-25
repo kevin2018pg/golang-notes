@@ -1,5 +1,5 @@
 # Golang-talk
-Golang 简单谈谈/学习笔记/使用心得
+Golang 简单谈谈/学习笔记/使用心得（cong ru men dao fang qi）
 
 ### Go 聊聊Protobuf的使用
 [聊聊Protobuf的使用](https://github.com/kevin2018pg/golang-notes/blob/master/Go-ProtocolBuffers%E4%BD%BF%E7%94%A8.md)
