@@ -11,7 +11,7 @@
 - Add:添加等待goroutine的数量，Done:相当于Add(-1),减掉一个goroutine计数，Wait:执行阻塞，直到所有的WaitGroup数量变成0
 
 * Add(-1) 和 Done() 效果一致，如果计数器变为负数，则panic
-* WaitGroup 缺点是无法指定固定的 Goroutine 数目,可以通过使用 channel 解决这个问题
+* WaitGroup 缺点是无法指定固定的 Goroutine 数目,可以通过使用缓存 channel 解决这个问题
 * 在运行 main 函数的 goroutine 里运行 Add() 方法，在其他的 goroutine 里面运行 Done() 方法
 
 **基本用法**
@@ -32,6 +32,29 @@ func main() {
         }(i)
     }
     wg.Wait()
+}
+```
+
+**用缓冲channel实现**
+
+```go
+package main
+
+import "fmt"
+
+func main() {
+	done := make(chan int, 10) //10个缓存
+	//开启10个协程
+	for i := 0; i < cap(done); i++ {
+		go func() {
+			fmt.Println("你好，世界！")
+			done <- 1
+		}()
+	}
+	//阻塞等待10个协程执行完成
+	for i := 0; i < cap(done); i++ {
+		<-done
+	}
 }
 ```
 
