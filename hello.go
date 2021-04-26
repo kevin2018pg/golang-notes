@@ -2,7 +2,11 @@ package main
 
 import "fmt"
 
-
 func main() {
-   fmt.Printf("hello world!")
+	done := make(chan int)
+	go func() {
+		fmt.Println("你好，世界！")
+		done <- 1
+	}()
+	<-done
 }
