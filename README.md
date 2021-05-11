@@ -10,5 +10,8 @@ Golang 简单谈谈/学习笔记/使用心得（cong ru men dao fang qi）
 ### Go 令人头晕的WaitGroup+channel+context协程同步
 [令人头晕的WaitGroup+channel+context协程同步](https://github.com/kevin2018pg/golang-notes/blob/master/Go-WaitGroup%26channel%26context%E5%B9%B6%E5%8F%91.md)
 
+### Go 结构体排序的几种方法
+[cls]
+
 附上
 <p align="center"><img height="90%" width="90%" src="image/go知识图谱.jpg" /></p>
