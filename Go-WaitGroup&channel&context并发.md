@@ -191,3 +191,38 @@ wg.Wait
 channel done
 ```
 
+### 并发的循环
+**from Go语言圣经**
+```go
+// makeThumbnails5 makes thumbnails for the specified files in parallel.
+// It returns the generated file names in an arbitrary order,
+// or an error if any step failed.
+func makeThumbnails5(filenames []string) (thumbfiles []string, err error) {
+    type item struct {
+        thumbfile string
+        err       error
+    }
+
+    ch := make(chan item, len(filenames))
+    for _, f := range filenames {
+        go func(f string) {
+            var it item
+            it.thumbfile, it.err = thumbnail.ImageFile(f)
+            ch <- it
+        }(f)
+    }
+
+    for range filenames {
+        it := <-ch
+        if it.err != nil {
+            return nil, it.err
+        }
+        thumbfiles = append(thumbfiles, it.thumbfile)
+    }
+
+    return thumbfiles, nil
+}
+```
+Add是为计数器加一，必须在worker goroutine开始之前调用，而不是在goroutine中；否则的话我们没办法确定Add是在"closer" goroutine调用Wait之前被调用。并且Add还有一个参数，但Done却没有任何参数；其实它和Add(-1)是等价的。我们使用defer来确保计数器即使是在出错的情况下依然能够正确地被减掉。上面的程序代码结构是当我们使用并发循环，但又不知道迭代次数时很通常而且很地道的写法。
+sizes channel携带了每一个文件的大小到main goroutine，在main goroutine中使用了range loop来计算总和。观察一下我们是怎样创建一个closer goroutine，并让其在所有worker goroutine们结束之后再关闭sizes channel的。两步操作：wait和close，必须是基于sizes的循环的并发。考虑一下另一种方案：如果等待操作被放在了main goroutine中，在循环之前，这样的话就永远都不会结束了，如果在循环之后，那么又变成了不可达的部分，因为没有任何东西去关闭这个channel，这个循环就永远都不会终止。
+
