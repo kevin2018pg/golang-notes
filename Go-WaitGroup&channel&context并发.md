@@ -1,4 +1,4 @@
-## WaitGroup + channel + context 使用
+## WaitGroup + channel + select 使用
 
 ### sync.WaitGroup
 
