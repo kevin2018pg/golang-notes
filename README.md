@@ -16,7 +16,8 @@ Golang 简单谈谈/学习笔记/使用心得（cong ru men dao fang qi）
 ### TODO
 1. sync.Map
 2. channel通道
-3. Uber Go语言编码规范
+3. Uber Go语言编码规范【Done】
+4. context
 
 附上
 <p align="center"><img height="90%" width="90%" src="image/go知识图谱.jpg" /></p>
