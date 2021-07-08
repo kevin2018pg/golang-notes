@@ -14,10 +14,11 @@ Golang 简单谈谈/学习笔记/使用心得（cong ru men dao fang qi）
 [深入理解排序接口](https://github.com/kevin2018pg/golang-talk/blob/master/Go-%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3%E6%8E%92%E5%BA%8F%E6%8E%A5%E5%8F%A3.md)
 
 ### TODO
-1. sync.Map
-2. channel通道
+1. sync.Map【Done】
+2. channel通道【Done】
 3. Uber Go语言编码规范【Done】
-4. context
+4. context使用【Done】
+5. gRPC
 
 附上
 <p align="center"><img height="90%" width="90%" src="image/go知识图谱.jpg" /></p>
